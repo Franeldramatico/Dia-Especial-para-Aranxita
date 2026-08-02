@@ -1,43 +1,59 @@
-# Astro Starter Kit: Minimal
+# Dia Especial para Aranxita
 
-```sh
-npm create astro@latest -- --template minimal
+Página web de sorpresa para el Día de la Novia (1 de agosto), hecha con mucho amor para Aranxita, de parte de Franxito.
+
+Una página oscura y elegante con la historia de nosotros dos: la distancia entre Chile y México, nuestros dos países, y un amor que cruza continentes.
+
+## Funcionalidades
+
+- **4 temas de color**: morado (favorito de Aranxita), verde esmeralda con dorado, rojo vino tinto con oro y negro con oro. Se guardan en el navegador y se aplican antes de pintar la página para no parpadear.
+- **Música de fondo**: Summertime suena en loop infinito con un botón para pausarla, y solo una pestaña reproduce a la vez (aunque abras varias, no se duplica el audio).
+- **Página de fanfic** (`/fanfic`): una historia corta inspirada en nosotros, con barra de progreso de lectura, letra capital, diálogos destacados y botón de volver.
+- **Banderas oficiales** de Chile y México, hechas en SVG.
+- **Cero emojis**: todos los iconos son SVG dibujados con trazos (estilo Lucide).
+- Corazones flotantes, destello de transición al cambiar de tema y animaciones suaves al hacer scroll.
+
+## Stack
+
+- [Astro](https://astro.build) 7
+- [Tailwind CSS](https://tailwindcss.com) 4 (con el plugin oficial de Vite)
+- Material 3 como paleta base por tema
+- Tipografías: Playfair Display, Lora, Dancing Script y Roboto
+
+## Puesta en marcha
+
+```bash
+npm install
+npm run dev        # servidor de desarrollo en http://localhost:4321
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Para compilar la versión final:
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```bash
+npm run build      # genera la página estática en dist/
+npm run preview    # sirve la versión compilada localmente
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Estructura
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+```
+src/
+  components/
+    Icon.astro        # mapa de iconos SVG (sin emojis)
+    Controles.astro   # música, temas, corazones y animaciones
+  pages/
+    index.astro       # página principal
+    fanfic.astro      # el fanfic
+  styles/
+    global.css        # temas de color, animaciones y estilos
+public/
+  audio/Summertime.mp3
+  flags/chile.svg
+  flags/mexico.svg
+```
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Despliegue
 
-## 🧞 Commands
+Es una página 100% estática: basta con subir la carpeta `dist/` a cualquier hosting (GitHub Pages, Netlify, Vercel, Cloudflare Pages...).
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Hecha con amor, para ti mi amor. Que nuestra historia siempre tenga música de fondo.

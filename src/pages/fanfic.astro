@@ -1,0 +1,333 @@
+---
+import "../styles/global.css";
+import Icon from "../components/Icon.astro";
+import Controles from "../components/Controles.astro";
+---
+
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<script is:inline>
+			(function () {
+				var t = "morado";
+				try {
+					t = localStorage.getItem("tema") || "morado";
+				} catch (e) {}
+				document.documentElement.setAttribute("data-tema", t);
+			})();
+		</script>
+		<meta
+			name="description"
+			content="Un fanfic para Aranxita y Franxito, con amor."
+		/>
+		<title>Un fanfic para ti · Para Aranxita</title>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:opsz,wght@14..32,300..700&family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..800;1,400..800&family=Dancing+Script:wght@500..700&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body class="bg-surface font-sans text-on-surface antialiased">
+		<div class="glow-bg" aria-hidden="true"></div>
+
+		<!-- Barra de progreso de lectura -->
+		<div class="fixed left-0 top-0 z-50 h-1 w-full bg-transparent">
+			<div
+				id="barra-lectura-relleno"
+				class="h-full w-0 bg-gradient-to-r from-primary via-tertiary to-primary"
+			></div>
+		</div>
+
+		<!-- Volver a la página principal -->
+		<a
+			href="/"
+			class="volver-btn fixed left-6 top-6 z-30 no-underline"
+			aria-label="Volver a la página principal"
+		>
+			<span
+				class="flex size-10 items-center justify-center rounded-full bg-primary-container text-on-primary-container shadow-elev-1"
+			>
+				<Icon name="back" size={18} />
+			</span>
+			<span class="etiqueta">Volver</span>
+		</a>
+
+		<main class="relative z-10 mx-auto max-w-2xl px-6 pb-24 pt-20">
+			<header class="text-center">
+				<div class="eyebrow aparecer" style="animation-delay: 100ms">
+					<Icon name="book" size={13} />
+					Fanfic · para ti
+					<Icon name="book" size={13} />
+				</div>
+				<h1
+					class="aparecer mt-5 font-display text-5xl font-bold sm:text-6xl"
+					style="animation-delay: 200ms"
+				>
+					<span class="titulo-brillo">Notas bajo la lluvia</span>
+				</h1>
+				<p
+					class="aparecer mt-5 font-script text-3xl text-primary sm:text-4xl"
+					style="animation-delay: 350ms"
+				>
+					un fanfic inspirado en nosotros
+				</p>
+				<div
+					class="aparecer mt-8 flex items-center justify-center gap-3"
+					style="animation-delay: 500ms"
+				>
+					<span class="h-px w-14 bg-gradient-to-r from-transparent to-primary/60"></span>
+					<Icon name="heart" size={16} class="animate-latido text-tertiary" />
+					<Icon name="infinity" size={16} class="text-primary/70" />
+					<span class="h-px w-14 bg-gradient-to-l from-transparent to-primary/60"></span>
+				</div>
+				<p
+					class="aparecer mx-auto mt-6 max-w-md text-sm text-on-surface-variant/80"
+					style="animation-delay: 650ms"
+				>
+					Dedicado con todo mi amor a Aranxita, de parte de Franxito
+				</p>
+			</header>
+
+			<article class="libro-pagina aparecer mt-12 rounded-[2rem] p-7 sm:p-12">
+				<div class="lectura space-y-7 text-on-surface-variant">
+					<p class="drop-cap">
+						El repiqueteo constante y rítmico de la lluvia contra los grandes
+						cristales del ventanal envolvió al departamento en una penumbra dorada
+						y profundamente acogedora, matizada apenas por la luz tenue de la
+						pequeña lámpara de pie que iluminaba la esquina del salón. La calidez
+						del hogar se sentía densa en el ambiente, impregnada del suave aroma a
+						tierra mojada que se filtraba desde el balcón y del vapor reconfortante
+						de un té de manzanilla con miel que apenas comenzaba a hervir despacito
+						en la cocina.
+					</p>
+					<p>
+						En un rincón de la sala, descansando sobre su pedestal con la madera
+						pulida y desgastada por los años de uso cotidiano, reposaba la guitarra
+						acústica de Aranxita. A su lado, en marcado contraste, descansaba el
+						bajo eléctrico de Franxito, imponente, impecable, reluciente y envuelto
+						en ese halo intimidante que rodea a los instrumentos completamente
+						nuevos que aún no han sido bautizados por la práctica.
+					</p>
+					<p>
+						A sus veinticinco años, compartiendo la vida y cada rincón de aquel
+						espacio que habían ido amueblando juntos a su medida, Franxito
+						contemplaba el mástil de madera oscura con una mezcla de ilusión pura y
+						una timidez paralizante. Llevaba días queriendo aprender a tocar desde
+						cero, sintiendo esa necesidad bonita de sacarle sonido a esas cuatro
+						cuerdas gruesas y pesadas, pero la sola idea de hacer vibrar una notita
+						desafinada y romper el silencio pacífico de la tarde lo hacía encogerse
+						de hombros dentro de su polerón holgado. Se le figuraba que el ruido
+						metálico de un fallo empañaría la atmósfera tan perfecta que compartían.
+					</p>
+					<p>
+						Aprovechando que Aranxita se había encaminado hacia la cocina con sus
+						pasos silenciosos para preparar la bebida caliente, Franxito juntó
+						valor. Miró de reojo hacia el pasillo, respiró profundo y se acercó al
+						rincón. Tomó el bajo con extrema cautela, sintiendo la solidez y el
+						peso real del cuerpo del instrumento contra sus muslos mientras se
+						acomodaba en el borde del sillón. Con un cuidado casi exagerado para no
+						hacer el menor ruido audible en la habitación, tomó el cable jack, lo
+						conectó al amplificador enano de práctica y se puso unos audífonos
+						grandes que aislaban por completo el sonido hacia el exterior.
+					</p>
+					<p>
+						Ajustó la correa despacito, sintiendo la firmeza de la tira sobre su
+						hombro, y deslizó la yema de los dedos por la superficie fría y áspera
+						de las cuerdas metálicas. Sintiéndose por fin a salvo en su propio
+						mundo privado y silencioso, presionó el primer traste con demasiada
+						fuerza, sintiendo la dureza del metal incrustándose en la piel aún
+						suave de sus dedos. Al pulsar la cuarta cuerda con la otra mano, el
+						sonido resonó únicamente en la cavidad de sus audífonos: fue una nota
+						opaca, un trasteo metálico, seco e imperfecto que lo hizo suspirar con
+						una mezcla de frustración y vergüenza. Reacomodó la mano con torpeza,
+						intentando recordar el diagrama del manual que había estado mirando por
+						la mañana, pero al volver a intentar, el vibrar torpe de la cuerda
+						gruesa volvió a sonar desacoplado. Dejó escapar una risita contenida
+						contra su propio pecho, esquivando la mirada hacia la pared vacía,
+						avergonzado de sus propios fallos a pesar de que nadie más podía
+						escucharlo.
+					</p>
+					<p>
+						Lo que Franxito no sabía era que Aranxita ya se había asomado desde el
+						marco de la cocina. Sosteniendo una taza entre las manos, se había
+						quedado congelada al verlo, observando cada uno de sus pequeños
+						movimientos torpes con una ternura infinita. Contuvo la respiración
+						para no interrumpir la escena. Al notar cómo él bajaba la cabeza y se
+						encogía de hombros tras cada intento fallido, dejó la taza sobre la
+						mesa auxiliar con delicadeza absoluta. Avanzó en silencio sobre la
+						alfombra suave, cruzó la sala con pasos ligeros y se dirigió
+						directamente al pedestal de su guitarra acústica. La tomó en brazos y
+						se sentó en el suelo, justo entre las piernas de él, quedando de frente
+						a su regazo.
+					</p>
+					<p>
+						Con un movimiento sumamente delicado y un gesto cargado de dulzura,
+						Aranxita estiró su mano chiquita y le retiró suavemente uno de los
+						audífonos, dejándolo colgar de lado sobre el cuello del polerón de
+						Franxito. Él dio un pequeñito brinco de sorpresa y, al encontrarse de
+						golpe con la mirada tibia de ella, sintió cómo un calor instantáneo le
+						teñía las mejillas de un rojo encendido. Tapándose la mitad del rostro
+						tras la curva del mástil del bajo, intentó esconderse por la vergüenza
+						de haber sido descubierto en su torpeza. Aranxita sonrió con una
+						devoción enorme, ladeando la cabeza y murmurando con esa voz apacible
+						que a él siempre le derretía el alma:
+					</p>
+					<p class="dialogo">
+						—Awww mi bebo... no te me escondas con los audífonos, déjame
+						escucharte, si estamos juntitos.
+					</p>
+					<p>
+						El tono reconfortante y consentidor de sus palabras hizo que Franxito
+						bajara despacito el instrumento, dejando escapar un suspiro tímido
+						mientras una sonrisa apenada y dulce se le dibujaba en la comisura de
+						los labios.
+					</p>
+					<p class="dialogo">
+						—Es que suena feo todavía, no quiero arruinar la tarde... —alcanzó a
+						murmurar él en voz muy bajita, rascándose la nuca con timidez.
+					</p>
+					<p>
+						Aranxita no dijo nada al principio; simplemente dejó su guitarra
+						apoyada a un lado por un instante y se inclinó un poco más hacia él.
+						Estiró sus manos y buscó las de Franxito, cubriéndolas con la calidez
+						de su propia piel. Con una paciencia infinita, tomó la mano izquierda
+						de él y fue reacomodándole los dedos uno a uno sobre el diapasón del
+						bajo. Le mostró cómo abrazar la madera con el pulgar por detrás sin
+						hacer tanta fuerza innecesaria, guiando su dedo índice exactamente
+						sobre el centro del traste para que la cuerda no vibrara mal. El roce
+						directo de sus manos, la cercanía de sus respiraciones y el calor
+						compartido provocaron que ambos hicieran una pausa involuntaria. Se
+						miraron a los ojos a escasos centímetros de distancia por un segundo
+						eterno, hasta que la vergüenza dulce los venció a los dos y bajaron la
+						cabeza al mismo tiempo, sonrojados, dejando escapar risitas ahogadas
+						contra sus propios hombros.
+					</p>
+					<p>
+						Aranxita volvió a acomodar su guitarra acústica sobre el regazo. Ajustó
+						la afinación de una cuerda con un toque sutil y comenzó a desgranar una
+						melodía pausada, melancólica y envolvente. Era una progresión
+						arpegiada, inspirada en las baladas más lentas y suaves de esa estética
+						oscura que a ambos les fascinaba desde hacía años, pero interpretada
+						ahora con una calidez íntima que llenó cada rincón del departamento. El
+						sonido de la madera resonó en el aire, envolviendo el chasquido suave
+						de la lluvia. Ella lo miró desde abajo con los ojos entrecerrados y una
+						sonrisita tierna, marcando el compás con leves movimientos de cabeza y
+						pidiéndole en un susurro cargado de cariño:
+					</p>
+					<p class="dialogo">
+						—Sigue mi ritmo, ush ush... solo esta notita, juntitos.
+					</p>
+					<p>
+						Franxito tragó saliva despacito, concentrando toda su atención en el
+						punto exacto donde las manos de ella le habían marcado la posición.
+						Respiró hondo, cerró los ojos un instante para dejarse llevar por el
+						pulso suave de la guitarra acústica, y finalmente pulsó la cuerda
+						gruesa con la yema del pulgar.
+					</p>
+					<p>
+						Esta vez no hubo trasteos ásperos ni ruidos secos: la notita brotó
+						limpia, grave, cálida y profunda, retumbando suavemente en el suelo de
+						madera y encajando a la perfección justo debajo de los acordes de la
+						guitarra de Aranxita. Un escalofrío de pura emoción le recorrió la
+						espalda a Franxito. Ella abrió los ojos de par en par, iluminándosele
+						el rostro con un orgullo inmenso, y asintió levemente mientras
+						aceleraba imperceptiblemente el rasgueo para envolver la nota del bajo.
+					</p>
+					<p>
+						Durante largos minutos, en medio del murmullo constante del agua
+						cayendo afuera y la luz tenue del salón, los dos se quedaron flotando en
+						esa pequeña secuencia de notas. No necesitaban hablar; el ensamble
+						perfecto entre la agudeza dulce de la acústica y el retumbo grave del
+						bajo recién descubierto construyó un puente invisible entre los dos.
+						Tocaron esa misma notita una y otra vez, mejorando la intención en cada
+						pulsación, perdiéndose por completo en la calidez del momento y en la
+						paz de estar juntos haciendo música por primera vez.
+					</p>
+					<p>
+						Cuando la última resonancia del bajo se apaciguó despacito en el aire y
+						la última cuerda de la guitarra dejó de vibrar, el silencio que regresó
+						al espacio no se sintió vacío en absoluto, sino repleto de una
+						complicidad abrumadora. Franxito se quedó mirando el bajo en sus manos,
+						casi sin poder creer lo bonito que había sonado aquel pequeño acorde
+						compartido. Con un cuidado extremo, colocó el bajo de nuevo en su
+						pedestal, mientras Aranxita hacía lo mismo con su guitarra a un
+						costado.
+					</p>
+					<p>
+						Sin esperar un segundo más, Aranxita se impulsó desde el suelo y se
+						lanzó a los brazos de Franxito, envolviendo su cuello con fuerza.
+						Presionó su rostro directamente contra el hueco entre el hombro y el
+						cuello de él, escondiendo la cara de pura vergüenza por el arrebato de
+						afecto. Franxito sonrió de oreja a oreja con el corazón latiéndole
+						desbocado; rodeó la cintura de ella con sus brazos, envolviéndola por
+						completo dentro de su polerón para protegerla del frío. La apretó
+						despacito contra su pecho, sintiendo el calor reconfortante de su
+						cuerpo y el aroma de su cabello, y pegó la barbilla sobre su cabeza,
+						susurrándole con la voz quebrada por la ternura:
+					</p>
+					<p class="dialogo">
+						—Gracias, ush ush... eres la mejor maestra, awww mi bebé.
+					</p>
+					<p>
+						Aranxita dejó escapar una risita ahogada contra su tela, frotando su
+						mejilla con dulzura contra él y apretándolo un poquito más fuerte.
+						Dejándose llevar por el cansancio apacible de la tarde y el arrullo de
+						la tormenta, ambos se fueron deslizando despacito hacia abajo hasta
+						quedar completamente sentados e integrados sobre la alfombra mullida.
+						Se acurrucaron juntos, entrelazando las piernas y buscando el calor
+						mutuo, disfrutando del silencio perfecto de su hogar mientras la lluvia
+						continuaba bañando los cristales afuera.
+					</p>
+				</div>
+			</article>
+
+			<!-- Fin -->
+			<footer class="aparecer mt-20 text-center" style="animation-delay: 150ms">
+				<div class="flex items-center justify-center gap-3">
+					<span class="h-px w-16 bg-gradient-to-r from-transparent to-primary/60"></span>
+					<Icon name="heart" size={18} class="animate-latido text-tertiary" />
+					<Icon name="infinity" size={18} class="text-primary/70" />
+					<Icon name="heart" size={18} class="animate-latido text-tertiary" />
+					<span class="h-px w-16 bg-gradient-to-l from-transparent to-primary/60"></span>
+				</div>
+				<p class="mt-6 font-script text-4xl text-primary">Fin</p>
+				<p class="mx-auto mt-3 max-w-md text-sm text-on-surface-variant/80">
+					Un fanfic para ti, mi amor. Que nuestra historia siempre tenga música de
+					fondo.
+				</p>
+				<a
+					href="/"
+					class="group mt-9 inline-flex items-center gap-3 rounded-full bg-primary px-8 py-3.5 font-semibold text-on-primary shadow-elev-3 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_45px_-8px_var(--color-primary)]"
+				>
+					<Icon
+						name="back"
+						size={20}
+						class="transition-transform duration-300 group-hover:-translate-x-1"
+					/>
+					Volver a la página principal
+				</a>
+			</footer>
+		</main>
+
+		<Controles />
+
+		<script>
+			// Barra de progreso de lectura
+			const relleno = document.getElementById("barra-lectura-relleno");
+			function actualizarProgreso() {
+				const total = document.documentElement.scrollHeight - window.innerHeight;
+				relleno.style.width =
+					(total > 0 ? (window.scrollY / total) * 100 : 0) + "%";
+			}
+			window.addEventListener("scroll", actualizarProgreso, { passive: true });
+			window.addEventListener("resize", actualizarProgreso);
+			actualizarProgreso();
+		</script>
+	</body>
+</html>

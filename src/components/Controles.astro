@@ -1,0 +1,325 @@
+---
+import Icon from "./Icon.astro";
+---
+
+<!-- Controles: música y tema -->
+<div class="fixed right-6 top-6 z-30 flex flex-col items-end gap-3">
+	<button
+		id="musica-btn"
+		class="musica-btn"
+		aria-label="Reproducir o pausar la música"
+		aria-pressed="false"
+	>
+		<span class="text-xs font-semibold uppercase tracking-[0.25em]">
+			Summertime
+		</span>
+		<span id="musica-icono" class="flex items-center">
+			<Icon name="music" size={18} />
+		</span>
+		<span id="ecualizador" class="ecualizador" aria-hidden="true" hidden>
+			<span></span><span></span><span></span>
+		</span>
+	</button>
+
+	<div class="relative">
+		<button
+			id="tema-btn"
+			class="musica-btn"
+			aria-label="Cambiar el tema de colores"
+			aria-expanded="false"
+		>
+			<Icon name="palette" size={18} />
+			<span
+				id="tema-nombre"
+				class="text-xs font-semibold uppercase tracking-[0.25em]"
+			>
+				Morado
+			</span>
+		</button>
+
+		<div
+			id="tema-menu"
+			class="tema-menu"
+			role="menu"
+			aria-label="Temas de color"
+			hidden
+		>
+			<button class="menu-item" data-tema-opcion="morado" role="menuitem">
+				<span class="tema-dot" style="background: #d0bcff"></span>
+				Morado
+				<Icon name="check" size={16} class="check" />
+			</button>
+			<button class="menu-item" data-tema-opcion="verde" role="menuitem">
+				<span class="tema-dot" style="background: #66e09e"></span>
+				Verde
+				<Icon name="check" size={16} class="check" />
+			</button>
+			<button class="menu-item" data-tema-opcion="rojo-vino" role="menuitem">
+				<span class="tema-dot" style="background: #ff8091"></span>
+				Rojo vino
+				<Icon name="check" size={16} class="check" />
+			</button>
+			<button class="menu-item" data-tema-opcion="negro" role="menuitem">
+				<span class="tema-dot" style="background: #f5c95c"></span>
+				Negro
+				<Icon name="check" size={16} class="check" />
+			</button>
+		</div>
+	</div>
+</div>
+
+<!-- Destello de transición al cambiar de tema -->
+<div id="transicion-tema" aria-hidden="true"></div>
+
+<script>
+	// ─── Corazones SVG flotando (usan los colores del tema activo) ───
+	const svgNS = "http://www.w3.org/2000/svg";
+	let corazones = [];
+
+	function coloresTema() {
+		const estilo = getComputedStyle(document.documentElement);
+		const leer = (nombre, fallback) => {
+			const valor = estilo.getPropertyValue(nombre).trim();
+			return valor || fallback;
+		};
+		return [
+			leer("--color-primary", "#d0bcff"),
+			leer("--color-tertiary", "#efb8c8"),
+			leer("--color-primary-container", "#4f378b"),
+			leer("--color-on-primary-container", "#eaddff"),
+		];
+	}
+
+	function crearCorazones() {
+		const paleta = coloresTema();
+		for (let i = 0; i < 18; i++) {
+			const svg = document.createElementNS(svgNS, "svg");
+			svg.setAttribute("viewBox", "0 0 24 24");
+			svg.setAttribute("fill", paleta[i % paleta.length]);
+			svg.innerHTML =
+				'<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>';
+			const tam = 12 + Math.random() * 22;
+			svg.setAttribute("class", "corazon");
+			svg.style.width = tam + "px";
+			svg.style.height = tam + "px";
+			svg.style.left = Math.random() * 100 + "vw";
+			svg.style.animationDuration = 10 + Math.random() * 10 + "s";
+			svg.style.animationDelay = Math.random() * 12 + "s";
+			document.body.appendChild(svg);
+			corazones.push(svg);
+		}
+	}
+
+	function refrescarCorazones() {
+		const paleta = coloresTema();
+		corazones.forEach((svg, i) =>
+			svg.setAttribute("fill", paleta[i % paleta.length])
+		);
+	}
+
+	crearCorazones();
+
+	// ─── Aparición suave al hacer scroll ───
+	const observador = new IntersectionObserver(
+		(entradas) => {
+			for (const entrada of entradas) {
+				if (entrada.isIntersecting) {
+					entrada.target.classList.add("visible");
+					observador.unobserve(entrada.target);
+				}
+			}
+		},
+		{ threshold: 0.15 }
+	);
+	document.querySelectorAll(".reveal").forEach((el) => observador.observe(el));
+
+	// ─── Barra de progreso del 2.º año ───
+	const barra = document.getElementById("barra-anio");
+	if (barra) {
+		const obsBarra = new IntersectionObserver(
+			(entradas) => {
+				for (const entrada of entradas) {
+					if (entrada.isIntersecting) {
+						barra.style.width = "65%";
+						obsBarra.disconnect();
+					}
+				}
+			},
+			{ threshold: 0.4 }
+		);
+		obsBarra.observe(barra);
+	}
+
+	// ─── FAB "volver arriba" ───
+	const fab = document.getElementById("fab");
+	if (fab) {
+		window.addEventListener("scroll", () => {
+			fab.style.display = window.scrollY > 500 ? "flex" : "none";
+		});
+		fab.addEventListener("click", () =>
+			window.scrollTo({ top: 0, behavior: "smooth" })
+		);
+	}
+
+	// ─── Música: Summertime, en loop infinito (una sola pestaña a la vez) ───
+	const audio = new Audio("/audio/Summertime.mp3");
+	audio.loop = true;
+	audio.preload = "auto";
+
+	const btnMusica = document.getElementById("musica-btn");
+	const iconoMusica = document.getElementById("musica-icono");
+	const ecualizador = document.getElementById("ecualizador");
+	const iconoPausa =
+		'<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="14" y="4" width="4" height="16" rx="1"/><rect x="6" y="4" width="4" height="16" rx="1"/></svg>';
+	const iconoNota =
+		'<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>';
+
+	// Bandera compartida entre pestañas: solo una puede reproducir
+	const CLAVE_MUSICA = "musica_activa";
+	const EXPIRA_MS = 60 * 60 * 1000;
+
+	function musicaOcupada() {
+		try {
+			const t = Number(localStorage.getItem(CLAVE_MUSICA) || 0);
+			return t > 0 && Date.now() - t < EXPIRA_MS;
+		} catch (e) {
+			return false;
+		}
+	}
+
+	function marcarMusicaActiva() {
+		try {
+			localStorage.setItem(CLAVE_MUSICA, String(Date.now()));
+		} catch (e) {}
+	}
+
+	function marcarMusicaLibre() {
+		try {
+			localStorage.removeItem(CLAVE_MUSICA);
+		} catch (e) {}
+	}
+
+	let sonando = false;
+
+	function actualizarEstado() {
+		btnMusica.classList.toggle("sonando", sonando);
+		btnMusica.setAttribute("aria-pressed", String(sonando));
+		ecualizador.hidden = !sonando;
+		iconoMusica.innerHTML = sonando ? iconoPausa : iconoNota;
+	}
+
+	function reproducir() {
+		// si otra pestaña ya está sonando, esta no arranca
+		if (!sonando && musicaOcupada()) return;
+		audio
+			.play()
+			.then(() => {
+				sonando = true;
+				actualizarEstado();
+				marcarMusicaActiva();
+			})
+			.catch(() => {});
+	}
+
+	function pausar(limpiarBandera = true) {
+		audio.pause();
+		sonando = false;
+		actualizarEstado();
+		if (limpiarBandera) marcarMusicaLibre();
+	}
+
+	function alternarMusica() {
+		if (sonando) pausar();
+		else reproducir();
+	}
+
+	btnMusica.addEventListener("click", alternarMusica);
+
+	// Autoplay solo si ninguna otra pestaña está sonando
+	reproducir();
+
+	// Si el navegador bloqueó el autoplay, se activa con el primer toque
+	window.addEventListener(
+		"pointerdown",
+		() => {
+			if (!sonando) reproducir();
+		},
+		{ once: true }
+	);
+
+	// Si otra pestaña empieza a reproducir, esta pausa (sin borrar su bandera)
+	window.addEventListener("storage", (e) => {
+		if (e.key === CLAVE_MUSICA && e.newValue !== null && sonando) {
+			pausar(false);
+		}
+	});
+
+	// Al cerrar la pestaña, liberar la música para otras pestañas
+	window.addEventListener("pagehide", () => {
+		if (sonando) marcarMusicaLibre();
+	});
+
+	// ─── Temas de color: morado, verde, rojo vino y negro ───
+	const temaBtn = document.getElementById("tema-btn");
+	const temaMenu = document.getElementById("tema-menu");
+	const temaNombre = document.getElementById("tema-nombre");
+	const temaOpciones = document.querySelectorAll("[data-tema-opcion]");
+	const transicionTema = document.getElementById("transicion-tema");
+	const NOMBRES_TEMA = {
+		morado: "Morado",
+		verde: "Verde",
+		"rojo-vino": "Rojo vino",
+		negro: "Negro",
+	};
+
+	function temaActual() {
+		return document.documentElement.getAttribute("data-tema") || "morado";
+	}
+
+	function actualizarMenu() {
+		const actual = temaActual();
+		temaNombre.textContent = NOMBRES_TEMA[actual] ?? "Morado";
+		for (const opcion of temaOpciones) {
+			opcion.classList.toggle("activo", opcion.dataset.temaOpcion === actual);
+		}
+		refrescarCorazones();
+	}
+
+	function cerrarMenu() {
+		temaMenu.hidden = true;
+		temaBtn.setAttribute("aria-expanded", "false");
+	}
+
+	function aplicarTema(nombre) {
+		document.documentElement.setAttribute("data-tema", nombre);
+		try {
+			localStorage.setItem("tema", nombre);
+		} catch (e) {}
+		actualizarMenu();
+		cerrarMenu();
+		// destello radial del nuevo color
+		transicionTema.classList.remove("tema-bloom");
+		void transicionTema.offsetWidth;
+		transicionTema.classList.add("tema-bloom");
+	}
+
+	temaBtn.addEventListener("click", (e) => {
+		e.stopPropagation();
+		temaMenu.hidden = !temaMenu.hidden;
+		temaBtn.setAttribute("aria-expanded", String(!temaMenu.hidden));
+	});
+
+	for (const opcion of temaOpciones) {
+		opcion.addEventListener("click", () =>
+			aplicarTema(opcion.dataset.temaOpcion)
+		);
+	}
+
+	document.addEventListener("click", (e) => {
+		if (!temaMenu.hidden && !temaMenu.contains(e.target) && e.target !== temaBtn) {
+			cerrarMenu();
+		}
+	});
+
+	actualizarMenu();
+</script>

@@ -1,17 +1,456 @@
 ---
-
+import "../styles/global.css";
+import Icon from "../components/Icon.astro";
+import Controles from "../components/Controles.astro";
 ---
 
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<script is:inline>
+			(function () {
+				var t = "morado";
+				try {
+					t = localStorage.getItem("tema") || "morado";
+				} catch (e) {}
+				document.documentElement.setAttribute("data-tema", t);
+			})();
+		</script>
+		<meta
+			name="description"
+			content="Feliz Día de la Novia, Aranxita. Una página hecha con amor desde Chile para ti, en México."
+		/>
+		<title>Para Aranxita · Feliz Día de la Novia</title>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:opsz,wght@14..32,300..700&family=Playfair+Display:ital,wght@0,400..800;1,400..800&family=Dancing+Script:wght@500..700&display=swap"
+			rel="stylesheet"
+		/>
 	</head>
-	<body>
-		<h1>Astro</h1>
+	<body class="bg-surface font-sans text-on-surface antialiased">
+		<div class="glow-bg" aria-hidden="true"></div>
+
+		<!-- ═══ HERO ═══ -->
+		<header
+			class="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center"
+		>
+			<div
+				class="reveal mb-9 flex items-center gap-3 rounded-full border border-outline-variant/60 bg-surface-low/80 px-5 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-on-surface-variant backdrop-blur"
+			>
+				<Icon name="heart" size={15} class="text-primary" />
+				Día de la Novia
+				<Icon name="sparkles" size={15} class="text-tertiary" />
+			</div>
+
+			<h1
+				class="reveal font-display text-6xl font-bold leading-tight tracking-tight drop-shadow-[0_0_35px_rgba(208,188,255,0.25)] sm:text-7xl md:text-8xl"
+			>
+				<span class="titulo-brillo">Feliz Día de la Novia</span>
+			</h1>
+
+			<p
+				class="reveal mt-7 font-script text-4xl text-primary sm:text-5xl"
+				style="transition-delay: 150ms"
+			>
+				mi Aranxita
+			</p>
+
+			<p
+				class="reveal mt-5 max-w-xl text-lg leading-relaxed text-on-surface-variant"
+				style="transition-delay: 300ms"
+			>
+				Te escribo desde Chile con todo mi corazón, para la dueña de mi alma en
+				México. La distancia es solo un número… nuestro amor es infinito.
+			</p>
+
+			<div
+				class="reveal mt-10 grid w-full max-w-3xl items-center gap-6 sm:grid-cols-[1fr_auto_1fr]"
+				style="transition-delay: 450ms"
+			>
+				<div class="card flex flex-col items-center gap-3 rounded-m3-lg p-6">
+					<img
+						src="/flags/chile.svg"
+						alt="Bandera oficial de Chile"
+						class="w-40 rounded-lg shadow-elev-3 sm:w-48"
+					/>
+					<p class="font-medium text-on-surface-variant">Chile · mi hogar</p>
+				</div>
+
+				<div class="flex flex-col items-center gap-3 py-2">
+					<Icon
+						name="heart"
+						size={44}
+						class="animate-latido text-tertiary drop-shadow-[0_0_20px_rgba(239,184,200,0.6)]"
+					/>
+					<span
+						class="rounded-full border border-outline-variant/60 bg-surface-low/80 px-4 py-1.5 text-sm font-medium text-on-surface-variant backdrop-blur"
+					>
+						~7,000 km de amor
+					</span>
+					<Icon name="plane" size={22} class="animate-flotar text-primary/70" />
+				</div>
+
+				<div class="card flex flex-col items-center gap-3 rounded-m3-lg p-6">
+					<img
+						src="/flags/mexico.svg"
+						alt="Bandera oficial de México"
+						class="w-40 rounded-lg object-cover shadow-elev-3 sm:w-48"
+					/>
+					<p class="font-medium text-on-surface-variant">México · tu hogar</p>
+				</div>
+			</div>
+
+			<a
+				href="#nuestro-tiempo"
+				aria-label="Bajar a la siguiente sección"
+				class="reveal mt-16 flex size-14 items-center justify-center rounded-full bg-primary-container text-on-primary-container shadow-elev-2 transition-transform duration-300 hover:scale-110"
+				style="transition-delay: 600ms"
+			>
+				<Icon name="chevrons" size={24} />
+			</a>
+		</header>
+
+		<main class="relative z-10 mx-auto max-w-4xl px-6">
+			<!-- ═══ NUESTRO TIEMPO ═══ -->
+			<section id="nuestro-tiempo" class="py-12">
+				<div class="eyebrow reveal">
+					<Icon name="sparkles" size={13} />
+					Nuestro tiempo
+					<Icon name="sparkles" size={13} />
+				</div>
+				<h2
+					class="reveal mt-4 text-center font-display text-4xl font-bold sm:text-5xl"
+				>
+					Nuestro tiempo juntos
+				</h2>
+				<p class="reveal mx-auto mt-4 max-w-lg text-center text-on-surface-variant">
+					Un año de amor cumplido… y ya vamos por el segundo. Cada día te quiero
+					más.
+				</p>
+
+				<div class="mt-12 grid gap-5 sm:grid-cols-3">
+					<article class="card reveal rounded-m3-xl p-7">
+						<div
+							class="mb-5 flex size-12 items-center justify-center rounded-full bg-primary-container text-on-primary-container"
+						>
+							<Icon name="heart" size={22} />
+						</div>
+						<p class="font-display text-3xl font-bold text-primary">
+							Más de un año
+						</p>
+						<p class="mt-1.5 text-sm text-on-surface-variant">
+							de puro amor juntos
+						</p>
+					</article>
+
+					<article
+						class="card reveal rounded-m3-xl border-primary/30 p-7"
+						style="transition-delay: 120ms"
+					>
+						<div
+							class="mb-5 flex size-12 items-center justify-center rounded-full bg-primary text-on-primary"
+						>
+							<Icon name="sparkles" size={22} />
+						</div>
+						<p class="font-display text-3xl font-bold text-primary">
+							Segundo año
+						</p>
+						<p class="mt-1.5 text-sm text-on-surface-variant">
+							¡y vamos en camino!
+						</p>
+					</article>
+
+					<article
+						class="card reveal rounded-m3-xl p-7"
+						style="transition-delay: 240ms"
+					>
+						<div
+							class="mb-5 flex size-12 items-center justify-center rounded-full bg-tertiary-container text-on-tertiary-container"
+						>
+							<Icon name="globe" size={22} />
+						</div>
+						<p class="font-display text-3xl font-bold text-tertiary">2 países</p>
+						<p class="mt-1.5 text-sm text-on-surface-variant">
+							Chile y México, un solo corazón
+						</p>
+					</article>
+				</div>
+
+				<!-- barra del 2.º año -->
+				<div class="card reveal mt-10 rounded-m3-xl p-7">
+					<div class="mb-4 flex items-center justify-between">
+						<span class="flex items-center gap-2.5 font-medium">
+							<Icon name="flag" size={18} class="text-primary" />
+							2.º año en camino
+						</span>
+						<span class="text-sm text-on-surface-variant">
+							¡a mitad de camino!
+						</span>
+					</div>
+					<div class="h-3 overflow-hidden rounded-full bg-surface-highest">
+						<div
+							class="barra-anio h-full rounded-full bg-gradient-to-r from-primary via-tertiary to-primary"
+							id="barra-anio"
+						></div>
+					</div>
+				</div>
+			</section>
+
+			<!-- ═══ CHILE ⇄ MÉXICO ═══ -->
+			<section class="py-12">
+				<div class="eyebrow reveal">
+					<Icon name="plane" size={13} />
+					La distancia no importa
+					<Icon name="plane" size={13} />
+				</div>
+				<h2
+					class="reveal mt-4 text-center font-display text-4xl font-bold sm:text-5xl"
+				>
+					Dos países, un solo latido
+				</h2>
+				<p class="reveal mx-auto mt-4 max-w-lg text-center text-on-surface-variant">
+					Los kilómetros no saben de corazones: el tuyo late al mismo ritmo que
+					el mío a 7,000 km de distancia.
+				</p>
+
+				<div class="mt-12 grid items-stretch gap-5 sm:grid-cols-3">
+					<div
+						class="card reveal flex flex-col items-center justify-center rounded-m3-xl p-8 text-center"
+					>
+						<img
+							src="/flags/chile.svg"
+							alt="Bandera oficial de Chile"
+							class="w-full max-w-52 rounded-lg shadow-elev-3"
+						/>
+						<h3 class="mt-6 font-display text-2xl font-bold">Chile</h3>
+						<p class="mt-1 text-sm text-on-surface-variant">
+							donde te escribo cada noche
+						</p>
+					</div>
+
+					<div
+						class="reveal flex flex-col items-center justify-center gap-4 py-4"
+						style="transition-delay: 150ms"
+					>
+						<Icon
+							name="heart"
+							size={52}
+							class="animate-latido text-tertiary drop-shadow-[0_0_24px_rgba(239,184,200,0.55)]"
+						/>
+						<span
+							class="rounded-full border border-outline-variant/60 bg-surface-low/80 px-5 py-2 text-sm font-medium text-on-surface-variant backdrop-blur"
+						>
+							~7,000 km de amor
+						</span>
+						<Icon name="plane" size={24} class="animate-flotar text-primary/70" />
+					</div>
+
+					<div
+						class="card reveal flex flex-col items-center justify-center rounded-m3-xl p-8 text-center"
+						style="transition-delay: 300ms"
+					>
+						<img
+							src="/flags/mexico.svg"
+							alt="Bandera oficial de México"
+							class="w-full max-w-52 rounded-lg object-cover shadow-elev-3"
+						/>
+						<h3 class="mt-6 font-display text-2xl font-bold">México</h3>
+						<p class="mt-1 text-sm text-on-surface-variant">
+							donde vive mi corazón
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- ═══ NUESTRA HISTORIA ═══ -->
+			<section class="py-12">
+				<div class="eyebrow reveal">
+					<Icon name="calendar" size={13} />
+					Nuestra historia
+					<Icon name="calendar" size={13} />
+				</div>
+				<h2
+					class="reveal mt-4 text-center font-display text-4xl font-bold sm:text-5xl"
+				>
+					Capítulos de amor
+				</h2>
+				<p class="reveal mx-auto mt-4 max-w-lg text-center text-on-surface-variant">
+					Cada capítulo a tu lado es mi favorito.
+				</p>
+
+				<div class="mt-12 space-y-5">
+					<article class="card reveal flex gap-5 rounded-m3-xl p-7">
+						<div
+							class="flex size-12 shrink-0 items-center justify-center rounded-full bg-secondary-container text-on-secondary-container"
+						>
+							<Icon name="calendar" size={22} />
+						</div>
+						<div>
+							<h3 class="font-display text-2xl font-bold">Nuestro primer año</h3>
+							<p class="mt-2.5 leading-relaxed text-on-surface-variant">
+								El comienzo de esta historia: llamadas que se hacían cortas,
+								risas por videollamada, madrugadas desveladas y el corazón
+								latiendo fuerte por ti. Ahí supe que era para siempre.
+							</p>
+						</div>
+					</article>
+
+					<article
+						class="card reveal flex gap-5 rounded-m3-xl border-primary/35 bg-primary-container/60 p-7"
+						style="transition-delay: 150ms"
+					>
+						<div
+							class="flex size-12 shrink-0 items-center justify-center rounded-full bg-primary text-on-primary"
+						>
+							<Icon name="heart" size={22} />
+						</div>
+						<div>
+							<div class="flex flex-wrap items-center gap-3">
+								<h3 class="font-display text-2xl font-bold text-on-primary-container">
+									Nuestro segundo año
+								</h3>
+								<span
+									class="rounded-full bg-primary px-3 py-1 text-xs font-bold uppercase tracking-wide text-on-primary"
+								>
+									Aquí estamos
+								</span>
+							</div>
+							<p class="mt-2.5 leading-relaxed text-on-primary-container/80">
+								Y aquí seguimos, más enamorados que el primer día. Cada mes
+								juntos es una prueba más de que este amor cruza continentes y es
+								de esos de película.
+							</p>
+						</div>
+					</article>
+				</div>
+			</section>
+
+			<!-- ═══ CARTA ═══ -->
+			<section class="py-12">
+				<div class="eyebrow reveal">
+					<Icon name="mail" size={13} />
+					Para ti
+					<Icon name="mail" size={13} />
+				</div>
+				<h2
+					class="reveal mt-4 text-center font-display text-4xl font-bold sm:text-5xl"
+				>
+					Una carta de amor
+				</h2>
+
+				<article class="card reveal mt-10 rounded-m3-xl p-8 shadow-elev-3 sm:p-14">
+					<div class="mb-7 flex justify-center">
+						<div
+							class="flex size-14 items-center justify-center rounded-full bg-primary-container text-on-primary-container"
+						>
+							<Icon name="heart" size={26} class="animate-latido" />
+						</div>
+					</div>
+
+					<h3 class="text-center font-script text-5xl text-primary">
+						Mi Aranxita
+					</h3>
+
+					<div class="mt-8 space-y-6 leading-relaxed text-on-surface-variant">
+						<p class="drop-cap">
+							Hoy se celebra el Día de la Novia, y aunque el calendario solo me
+							dé un día para decirlo, yo lo celebro todos los días: tenerte a ti
+							es mi regalo más grande.
+						</p>
+						<p>
+							Aunque nos separen miles de kilómetros, siento tu amor más cerca
+							que nunca. Te escribo desde Chile con el mismo sueño de siempre:
+							caminar contigo por las calles de México, tomarte de la mano y no
+							soltarte jamás.
+						</p>
+						<p>
+							Gracias por cada llamada, cada mensaje, cada "buenos días" que
+							ilumina mi vida. Por ser mi paz, mi locura favorita y mi razón
+							para sonreír incluso en los días grises.
+						</p>
+						<p>
+							Vamos camino a nuestro segundo año juntos, y no puedo estar más
+							orgulloso de lo que hemos construido. La distancia es solo un
+							capítulo de nuestra historia… y el final de este libro lo
+							escribiremos juntos, en el mismo lugar. Te amo. :3
+						</p>
+					</div>
+
+					<p class="mt-9 flex items-center justify-end gap-2 font-script text-4xl text-tertiary">
+						Tu Franxito :3
+						<Icon name="heart" size={20} class="text-tertiary" />
+					</p>
+
+					<div class="mt-8 flex items-center justify-center gap-3">
+						<span class="h-px w-16 bg-gradient-to-r from-transparent to-primary/60"></span>
+						<Icon name="heart" size={16} class="text-primary" />
+						<span
+							class="text-xs font-semibold uppercase tracking-[0.35em] text-on-surface-variant"
+						>
+							Chile · México · Para siempre
+						</span>
+						<Icon name="infinity" size={18} class="text-primary" />
+						<span class="h-px w-16 bg-gradient-to-l from-transparent to-primary/60"></span>
+					</div>
+				</article>
+			</section>
+		</main>
+
+		<!-- ═══ FOOTER ═══ -->
+		<footer class="relative z-10 border-t border-outline-variant/40 px-6 py-14 text-center">
+			<p
+				class="reveal text-xs font-semibold uppercase tracking-[0.35em] text-on-surface-variant/80"
+			>
+				Para el final, una sorpresa
+			</p>
+			<a
+				href="/fanfic"
+				target="_blank"
+				rel="noopener"
+				class="reveal group mt-5 inline-flex items-center gap-3 rounded-full bg-primary px-9 py-4 text-lg font-semibold text-on-primary shadow-elev-3 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_45px_-8px_var(--color-primary)]"
+			>
+				<Icon
+					name="book"
+					size={22}
+					class="transition-transform duration-300 group-hover:-rotate-6"
+				/>
+				Leer fanfic
+				<Icon
+					name="back"
+					size={22}
+					class="-scale-x-100 transition-transform duration-300 group-hover:translate-x-1"
+				/>
+			</a>
+			<p class="mt-10 flex items-center justify-center gap-3 text-on-surface-variant">
+				<Icon name="heart" size={18} class="animate-latido text-tertiary" />
+				Hecho con amor en Chile para la dueña de mi corazón en México
+				<Icon name="heart" size={18} class="animate-latido text-tertiary" />
+			</p>
+			<p
+				class="mt-4 flex items-center justify-center gap-2 text-sm text-on-surface-variant/70"
+			>
+				Fran &amp; Aranxita
+				<Icon name="infinity" size={15} class="text-primary/70" />
+				una historia que cruza el continente
+			</p>
+		</footer>
+
+		<!-- FAB -->
+		<button
+			id="fab"
+			aria-label="Volver arriba"
+			class="fixed bottom-6 right-6 z-20 flex size-14 items-center justify-center rounded-full bg-primary text-on-primary shadow-elev-3 transition-transform hover:scale-110"
+			style="display: none"
+		>
+			<Icon name="up" size={24} />
+		</button>
+
+		<Controles />
 	</body>
 </html>

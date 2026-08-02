@@ -1,0 +1,602 @@
+@import "tailwindcss";
+
+@theme {
+	--font-sans: "Roboto", "Segoe UI", system-ui, sans-serif;
+	--font-display: "Playfair Display", Georgia, serif;
+	--font-script: "Dancing Script", cursive;
+	--font-serif: "Lora", Georgia, "Times New Roman", serif;
+
+	/* Material 3 · tema morado (predeterminado) */
+	--color-primary: #d0bcff;
+	--color-on-primary: #381e72;
+	--color-primary-container: #4f378b;
+	--color-on-primary-container: #eaddff;
+	--color-secondary: #ccc2dc;
+	--color-on-secondary: #332d41;
+	--color-secondary-container: #4a4458;
+	--color-on-secondary-container: #e8def8;
+	--color-tertiary: #efb8c8;
+	--color-on-tertiary: #492532;
+	--color-tertiary-container: #633b48;
+	--color-on-tertiary-container: #ffd9e2;
+	--color-surface: #1d192b;
+	--color-surface-low: #26212f;
+	--color-surface-container: #2a2536;
+	--color-surface-high: #352f41;
+	--color-surface-highest: #403a4c;
+	--color-on-surface: #e6e0e9;
+	--color-on-surface-variant: #cac4d0;
+	--color-outline: #938f99;
+	--color-outline-variant: #49454f;
+
+	--radius-m3-sm: 12px;
+	--radius-m3-md: 16px;
+	--radius-m3-lg: 20px;
+	--radius-m3-xl: 28px;
+
+	--shadow-elev-1: 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+	--shadow-elev-2: 0 1px 2px rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+	--shadow-elev-3: 0 4px 8px 3px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* ─── tema verde esmeralda + dorado ─── */
+html[data-tema="verde"] {
+	--color-primary: #66e09e;
+	--color-on-primary: #00391e;
+	--color-primary-container: #00693b;
+	--color-on-primary-container: #8df8bd;
+	--color-secondary: #b8c9b9;
+	--color-on-secondary: #233129;
+	--color-secondary-container: #39493d;
+	--color-on-secondary-container: #d5e7d8;
+	--color-tertiary: #f5c66d;
+	--color-on-tertiary: #402f00;
+	--color-tertiary-container: #6b4a10;
+	--color-on-tertiary-container: #ffdf9e;
+	--color-surface: #0f1610;
+	--color-surface-low: #171f18;
+	--color-surface-container: #1c241d;
+	--color-surface-high: #262f27;
+	--color-surface-highest: #313a31;
+	--color-on-surface: #e1e8df;
+	--color-on-surface-variant: #c2cbc1;
+	--color-outline: #8c968c;
+	--color-outline-variant: #434d43;
+}
+
+/* ─── tema rojo vino tinto + oro ─── */
+html[data-tema="rojo-vino"] {
+	--color-primary: #ff8091;
+	--color-on-primary: #5c0f22;
+	--color-primary-container: #8a1f36;
+	--color-on-primary-container: #ffd9e0;
+	--color-secondary: #e0bdc1;
+	--color-on-secondary: #46272c;
+	--color-secondary-container: #5f3d41;
+	--color-on-secondary-container: #ffdadd;
+	--color-tertiary: #f0c77f;
+	--color-on-tertiary: #452b00;
+	--color-tertiary-container: #6b4a12;
+	--color-on-tertiary-container: #ffdfa0;
+	--color-surface: #1a0e10;
+	--color-surface-low: #221517;
+	--color-surface-container: #271a1c;
+	--color-surface-high: #322426;
+	--color-surface-highest: #3d2f30;
+	--color-on-surface: #efe0e1;
+	--color-on-surface-variant: #d9c3c5;
+	--color-outline: #a08e8f;
+	--color-outline-variant: #574748;
+}
+
+/* ─── tema negro + oro ─── */
+html[data-tema="negro"] {
+	--color-primary: #f5c95c;
+	--color-on-primary: #422b00;
+	--color-primary-container: #5f4204;
+	--color-on-primary-container: #ffdfa0;
+	--color-secondary: #cdc5b8;
+	--color-on-secondary: #342e25;
+	--color-secondary-container: #4b4539;
+	--color-on-secondary-container: #e9e0d2;
+	--color-tertiary: #d5d3d9;
+	--color-on-tertiary: #3a3a42;
+	--color-tertiary-container: #515059;
+	--color-on-tertiary-container: #f0eef6;
+	--color-surface: #0a0a0c;
+	--color-surface-low: #141416;
+	--color-surface-container: #19191c;
+	--color-surface-high: #242428;
+	--color-surface-highest: #2f2f33;
+	--color-on-surface: #e9e8ec;
+	--color-on-surface-variant: #cbc9d0;
+	--color-outline: #949299;
+	--color-outline-variant: #47464c;
+}
+
+/* transición suave al cambiar de tema */
+body {
+	transition:
+		background-color 0.5s ease,
+		color 0.5s ease;
+}
+
+* {
+	transition-property: background-color, color, border-color;
+	transition-duration: 0.45s;
+	transition-timing-function: ease;
+}
+
+/* destello radial al cambiar de tema */
+#transicion-tema {
+	position: fixed;
+	inset: 0;
+	z-index: 40;
+	pointer-events: none;
+	opacity: 0;
+	background: radial-gradient(
+		circle at 50% 45%,
+		var(--color-primary) 0%,
+		transparent 65%
+	);
+}
+
+.tema-bloom {
+	animation: bloom 0.75s ease;
+}
+
+@keyframes bloom {
+	0% {
+		opacity: 0;
+	}
+	12% {
+		opacity: 0.55;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+/* ─── fondo con brillos ─── */
+.glow-bg {
+	position: fixed;
+	inset: 0;
+	z-index: 0;
+	pointer-events: none;
+	background:
+		radial-gradient(
+			900px 600px at 15% 10%,
+			color-mix(in srgb, var(--color-primary-container) 55%, transparent),
+			transparent 60%
+		),
+		radial-gradient(
+			800px 600px at 85% 30%,
+			color-mix(in srgb, var(--color-tertiary-container) 50%, transparent),
+			transparent 60%
+		),
+		radial-gradient(
+			1000px 800px at 50% 100%,
+			color-mix(in srgb, var(--color-secondary-container) 55%, transparent),
+			transparent 65%
+		);
+	transition: background 0.5s ease;
+}
+
+/* ─── corazones flotando ─── */
+.corazon {
+	position: fixed;
+	bottom: -60px;
+	z-index: 0;
+	pointer-events: none;
+	user-select: none;
+	opacity: 0;
+	animation: corazon-subir linear infinite;
+	will-change: transform, opacity;
+}
+
+@keyframes corazon-subir {
+	0% {
+		transform: translateY(0) rotate(-8deg) scale(0.5);
+		opacity: 0;
+	}
+	12% {
+		opacity: 0.6;
+	}
+	50% {
+		transform: translateY(-55vh) rotate(8deg) scale(1.05);
+	}
+	88% {
+		opacity: 0.45;
+	}
+	100% {
+		transform: translateY(-115vh) rotate(-8deg) scale(0.7);
+		opacity: 0;
+	}
+}
+
+/* ─── latido del corazón ─── */
+@keyframes latido {
+	0%,
+	100% {
+		transform: scale(1);
+	}
+	20% {
+		transform: scale(1.28);
+	}
+	40% {
+		transform: scale(1);
+	}
+	60% {
+		transform: scale(1.28);
+	}
+}
+
+.animate-latido {
+	animation: latido 1.3s ease-in-out infinite;
+	display: inline-block;
+}
+
+/* ─── título con brillo ─── */
+.titulo-brillo {
+	background: linear-gradient(
+		110deg,
+		var(--color-primary) 20%,
+		var(--color-on-primary-container) 40%,
+		var(--color-tertiary) 50%,
+		var(--color-primary) 60%,
+		var(--color-tertiary) 80%
+	);
+	background-size: 220% auto;
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+	animation: brillo 5s linear infinite;
+}
+
+@keyframes brillo {
+	0% {
+		background-position: 0% center;
+	}
+	100% {
+		background-position: 220% center;
+	}
+}
+
+/* ─── flotar suave ─── */
+@keyframes flotar {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-12px);
+	}
+}
+
+.animate-flotar {
+	animation: flotar 3.2s ease-in-out infinite;
+}
+
+/* ─── aparición al hacer scroll ─── */
+.reveal {
+	opacity: 0;
+	transform: translateY(28px);
+	transition:
+		opacity 0.7s ease,
+		transform 0.7s ease;
+}
+
+.reveal.visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* ─── aparición por CSS puro (el contenido siempre queda visible) ─── */
+.aparecer {
+	animation: aparecer 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes aparecer {
+	from {
+		opacity: 0;
+		transform: translateY(24px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* ─── barra de progreso del 2.º año ─── */
+.barra-anio {
+	width: 0%;
+	transition: width 1.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+}
+
+/* ─── botón de música y tema ─── */
+.musica-btn {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 0.65rem;
+	border: 1px solid rgb(255 255 255 / 0.1);
+	background: color-mix(in srgb, var(--color-surface-container) 92%, transparent);
+	backdrop-filter: blur(12px);
+	padding: 0.55rem 0.9rem 0.55rem 1rem;
+	border-radius: 999px;
+	color: var(--color-on-surface-variant);
+	cursor: pointer;
+	transition:
+		border-color 0.3s ease,
+		color 0.3s ease;
+}
+
+.musica-btn:hover {
+	border-color: color-mix(in srgb, var(--color-primary) 50%, transparent);
+	color: var(--color-on-surface);
+}
+
+.musica-btn.sonando {
+	border-color: color-mix(in srgb, var(--color-primary) 60%, transparent);
+	color: var(--color-primary);
+}
+
+/* ecualizador animado */
+.ecualizador {
+	display: flex;
+	align-items: flex-end;
+	gap: 2.5px;
+	height: 15px;
+	width: 16px;
+}
+
+.ecualizador span {
+	width: 3px;
+	height: 4px;
+	border-radius: 999px;
+	background: currentColor;
+	animation: ecualizar 1s ease-in-out infinite;
+}
+
+.ecualizador span:nth-child(2) {
+	animation-delay: 0.18s;
+}
+
+.ecualizador span:nth-child(3) {
+	animation-delay: 0.36s;
+}
+
+@keyframes ecualizar {
+	0%,
+	100% {
+		height: 4px;
+	}
+	50% {
+		height: 15px;
+	}
+}
+
+/* ─── menú de temas ─── */
+.tema-menu {
+	position: absolute;
+	top: calc(100% + 0.5rem);
+	right: 0;
+	min-width: 11.5rem;
+	padding: 0.4rem;
+	border-radius: 1rem;
+	border: 1px solid rgb(255 255 255 / 0.1);
+	background: color-mix(in srgb, var(--color-surface-container) 97%, transparent);
+	backdrop-filter: blur(14px);
+	box-shadow: var(--shadow-elev-3);
+	transform-origin: top right;
+	animation: menu-aparecer 0.18s ease;
+}
+
+@keyframes menu-aparecer {
+	from {
+		opacity: 0;
+		transform: translateY(-6px) scale(0.96);
+	}
+}
+
+.menu-item {
+	display: flex;
+	align-items: center;
+	gap: 0.65rem;
+	width: 100%;
+	padding: 0.55rem 0.75rem;
+	border-radius: 0.75rem;
+	font-size: 0.875rem;
+	color: var(--color-on-surface-variant);
+	cursor: pointer;
+	transition:
+		background 0.2s ease,
+		color 0.2s ease;
+}
+
+.menu-item:hover {
+	background: var(--color-surface-high);
+	color: var(--color-on-surface);
+}
+
+.menu-item .tema-dot {
+	width: 0.8rem;
+	height: 0.8rem;
+	border-radius: 999px;
+	box-shadow: 0 0 0 1px rgb(255 255 255 / 0.2);
+}
+
+.menu-item .check {
+	margin-left: auto;
+	opacity: 0;
+	color: var(--color-primary);
+}
+
+.menu-item.activo {
+	color: var(--color-on-surface);
+}
+
+.menu-item.activo .check {
+	opacity: 1;
+}
+
+/* ─── rótulo de sección premium ─── */
+.eyebrow {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.85rem;
+	text-transform: uppercase;
+	letter-spacing: 0.35em;
+	font-size: 0.72rem;
+	font-weight: 600;
+	color: var(--color-tertiary);
+}
+
+.eyebrow::before,
+.eyebrow::after {
+	content: "";
+	height: 1px;
+	width: 3.5rem;
+	background: linear-gradient(90deg, transparent, var(--color-tertiary));
+}
+
+.eyebrow::after {
+	background: linear-gradient(90deg, var(--color-tertiary), transparent);
+}
+
+/* ─── tarjeta premium ─── */
+.card {
+	position: relative;
+	border: 1px solid rgb(255 255 255 / 0.08);
+	background: linear-gradient(165deg, rgb(255 255 255 / 0.07), rgb(255 255 255 / 0.02));
+	backdrop-filter: blur(10px);
+	transition:
+		border-color 0.4s ease,
+		transform 0.4s ease,
+		box-shadow 0.4s ease;
+}
+
+.card:hover {
+	border-color: color-mix(in srgb, var(--color-primary) 45%, transparent);
+	box-shadow: 0 18px 50px -20px color-mix(in srgb, var(--color-primary-container) 60%, transparent);
+}
+
+/* ─── letra capital en la carta y el fanfic ─── */
+.drop-cap::first-letter {
+	font-family: "Playfair Display", Georgia, serif;
+	font-weight: 700;
+	font-size: 4em;
+	line-height: 0.8;
+	float: left;
+	padding: 0.06em 0.14em 0 0;
+	background: linear-gradient(165deg, var(--color-primary), var(--color-tertiary));
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	color: var(--color-primary);
+}
+
+::selection {
+	background: var(--color-primary-container);
+	color: var(--color-on-primary-container);
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+/* ─── scrollbar con los colores del tema ─── */
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--color-surface-low);
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--color-primary-container);
+	border-radius: 999px;
+	border: 2px solid var(--color-surface);
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--color-primary);
+}
+
+html {
+	scrollbar-width: auto;
+	scrollbar-color: var(--color-primary-container) var(--color-surface-low);
+}
+
+/* ─── párrafos con diálogo (fanfic) ─── */
+.dialogo {
+	border-left: 3px solid color-mix(in srgb, var(--color-primary) 55%, transparent);
+	padding: 0.25rem 1.1rem 0.25rem 1.3rem;
+	border-radius: 0 1rem 1rem 0;
+	background: color-mix(in srgb, var(--color-primary-container) 14%, transparent);
+	font-style: italic;
+}
+
+/* ─── página de libro (fanfic) ─── */
+.libro-pagina {
+	position: relative;
+	border: 1px solid rgb(255 255 255 / 0.09);
+	background: linear-gradient(
+		180deg,
+		color-mix(in srgb, var(--color-surface-container) 88%, transparent),
+		color-mix(in srgb, var(--color-surface-low) 92%, transparent)
+	);
+	backdrop-filter: blur(8px);
+	box-shadow: var(--shadow-elev-2);
+}
+
+.lectura p {
+	font-family: var(--font-serif);
+	font-size: 1.08rem;
+	line-height: 1.95;
+}
+
+/* ─── botón "volver" que se expande al pasar el mouse ─── */
+.volver-btn {
+	display: flex;
+	align-items: center;
+	gap: 0.55rem;
+	padding: 0.4rem;
+	border-radius: 999px;
+	border: 1px solid rgb(255 255 255 / 0.12);
+	background: color-mix(in srgb, var(--color-surface-container) 92%, transparent);
+	backdrop-filter: blur(12px);
+	color: var(--color-on-surface-variant);
+	transition:
+		border-color 0.3s ease,
+		color 0.3s ease,
+		box-shadow 0.3s ease;
+}
+
+.volver-btn:hover {
+	border-color: color-mix(in srgb, var(--color-primary) 60%, transparent);
+	color: var(--color-on-surface);
+	box-shadow: 0 10px 35px -12px color-mix(in srgb, var(--color-primary-container) 70%, transparent);
+}
+
+.volver-btn .etiqueta {
+	max-width: 0;
+	opacity: 0;
+	overflow: hidden;
+	white-space: nowrap;
+	font-size: 0.72rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.28em;
+	transition:
+		max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+		opacity 0.3s ease;
+}
+
+.volver-btn:hover .etiqueta {
+	max-width: 8rem;
+	opacity: 1;
+}
