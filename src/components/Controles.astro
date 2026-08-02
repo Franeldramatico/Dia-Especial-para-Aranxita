@@ -162,7 +162,7 @@ import Icon from "./Icon.astro";
 	}
 
 	// ─── Música: Summertime, en loop infinito (una sola pestaña a la vez) ───
-	const audio = new Audio("/audio/Summertime.mp3");
+	const audio = new Audio(import.meta.env.BASE_URL + "audio/Summertime.mp3");
 	audio.loop = true;
 	audio.preload = "auto";
 
