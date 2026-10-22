@@ -224,7 +224,7 @@ import Controles from "../components/Controles.astro";
 						class="card reveal flex flex-col items-center justify-center rounded-m3-xl p-8 text-center"
 					>
 						<img
-							src="/flags/chile.svg"
+							src={import.meta.env.BASE_URL + "flags/chile.svg"}
 							alt="Bandera oficial de Chile"
 							class="w-full max-w-52 rounded-lg shadow-elev-3"
 						/>
@@ -256,7 +256,7 @@ import Controles from "../components/Controles.astro";
 						style="transition-delay: 300ms"
 					>
 						<img
-							src="/flags/mexico.svg"
+							src={import.meta.env.BASE_URL + "flags/mexico.svg"}
 							alt="Bandera oficial de México"
 							class="w-full max-w-52 rounded-lg object-cover shadow-elev-3"
 						/>
